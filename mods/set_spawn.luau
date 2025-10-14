@@ -1,11 +1,11 @@
 -- INSTRUCTIONS:
--- ;set_spawn :: set the default spawn, does not reset overrides
--- ;set_spawn <username> :: set the spawn for a specific player (this is henchforth reffered to as a spawn override)
--- ;clear_spawn :: remove all spawn locations, reverts to default deadline spawns
--- ;clear_spawn DEFAULT :: remove only the default spawn, keeping overrides
--- ;clear_spawn OVERRIDE :: remove all spawn overrides
--- ;clear_spawn <username> :: remove the specific player's spawn override
--- ;list_spawn :: prints all the spawn conditions in the console
+-- ;spawn_set :: set the default spawn, does not reset overrides
+-- ;spawn_set <username> :: set the spawn for a specific player (this is henchforth reffered to as a spawn override)
+-- ;spawn_clear :: remove all spawn locations, reverts to default deadline spawns
+-- ;spawn_clear DEFAULT :: remove only the default spawn, keeping overrides
+-- ;spawn_clear OVERRIDE :: remove all spawn overrides
+-- ;spawn_clear <username> :: remove the specific player's spawn override
+-- ;spawn_list :: prints all the spawn conditions in the console
 
 
 -- load command bot
@@ -53,7 +53,7 @@ on_player_spawned:Connect(function(player_name: string)
 	end
 end)
 
-shared.dlcomp_command_bot.add_command("set_spawn", "set the spawn for everyone, or a specific player", function(args: string, extra: any)
+shared.dlcomp_command_bot.add_command("spawn_set", "set the spawn for everyone, or a specific player", function(args: string, extra: any)
 	if not extra.caller.is_alive() then
 		chat.send_announcement(`you arent alive (you are: [{extra.caller.name}])`)
 		return
@@ -80,7 +80,7 @@ shared.dlcomp_command_bot.add_command("set_spawn", "set the spawn for everyone, 
 	chat.send_announcement(`spawn override set for [{target_player.name}]`)
 end)
 
-shared.dlcomp_command_bot.add_command("clear_spawn", "clear spawn conditions, accepts the following paths: (none), DEFAULT, OVERRIDE, OVERRIDE <name>", function(args: string, extra: any)
+shared.dlcomp_command_bot.add_command("spawn_clear", "clear spawn conditions, accepts the following paths: (none), DEFAULT, OVERRIDE, OVERRIDE <name>", function(args: string, extra: any)
 	if not extra.caller.is_alive() then
 		chat.send_announcement(`you arent alive (you are: [{extra.caller.name}])`)
 		return
@@ -130,7 +130,7 @@ shared.dlcomp_command_bot.add_command("clear_spawn", "clear spawn conditions, ac
 	print_players_with_override()
 end)
 
-shared.dlcomp_command_bot.add_command("list_spawn", "prints all the spawn conditions in console", function()
+shared.dlcomp_command_bot.add_command("spawn_list", "prints all the spawn conditions in console", function()
 	warn("spawn conditions:")
 
 	print(`DEFAULT: {format_vector3(default_spawn)}`)
