@@ -80,7 +80,7 @@ shared.dlcomp_command_bot.add_command("spawn_set", "set the spawn for everyone, 
 	chat.send_announcement(`spawn override set for [{target_player.name}]`)
 end)
 
-shared.dlcomp_command_bot.add_command("spawn_clear", "clear spawn conditions, accepts the following paths: (none), DEFAULT, OVERRIDE, OVERRIDE <name>", function(args: string, extra: any)
+shared.dlcomp_command_bot.add_command("spawn_clear", "remove spawn conditions, accepts the following paths: (none), DEFAULT, OVERRIDE, <username>", function(args: string, extra: any)
 	if not extra.caller.is_alive() then
 		chat.send_announcement(`you arent alive (you are: [{extra.caller.name}])`)
 		return
@@ -89,7 +89,7 @@ shared.dlcomp_command_bot.add_command("spawn_clear", "clear spawn conditions, ac
 	local path, _ = shared.dlcomp_parser.get_string(args)
 
 	if path == "" then
-		-- remove all spawn conditions if nothing gets passed
+		-- nothing was passed, remove all spawn conditions
 		default_spawn = nil
 		spawn_overrides = {}
 		chat.send_announcement(`all spawn conditions removed, its like nothing even happened..`)
@@ -106,7 +106,7 @@ shared.dlcomp_command_bot.add_command("spawn_clear", "clear spawn conditions, ac
 		return
 
 	elseif path == "OVERRIDE" then
-		-- remove only the override
+		-- remove only the player overrides
 		spawn_overrides = {}
 
 		chat.send_announcement(`removed all spawn overrides`)
@@ -118,13 +118,14 @@ shared.dlcomp_command_bot.add_command("spawn_clear", "clear spawn conditions, ac
 
 	end
 
-	-- remove the target player's spawn override
+	-- get the target player
 	local target_player, parse_info = shared.dlcomp_parser.get_player(args)
 	if not target_player then
 		chat.send_announcement(`target player with name [{parse_info.converted_from}] not found`)
 		return
 	end
 
+	-- remove the target player's spawn override
 	spawn_overrides[target_player.name] = nil
 	chat.send_announcement(`removed [{target_player.name}]'s spawn override, check console for players that still have a spawn override`)
 	print_players_with_override()
