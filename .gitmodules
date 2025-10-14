@@ -1,0 +1,3 @@
+[submodule "deadline-types"]
+	path = deadline-types
+	url = https://github.com/LegitACarWithAGun/deadline-luau-api-types.git
