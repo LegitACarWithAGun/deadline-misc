@@ -1,21 +1,31 @@
 {
-    "luau-lsp.types.definitionFiles": [
+	// prevents the default roblox services from being suggested by intellisense, since importing those is disabled in deadline
+	// IE: game:GetService("AdService"), RunService
+	"luau-lsp.completion.imports.suggestServices": false,
+	// almost definetly not usable in deadline
+    "luau-lsp.sourcemap.enabled": false,
+
+	// adds default roblox types And globals, see luau-lsp.types.disabledGlobals for all the globals that arent used
+	"luau-lsp.platform.type": "roblox",
+
+	// type files for deadline types and globals
+	"luau-lsp.types.definitionFiles": {
 		// shared
-		"./deadline-types/shared/shared-types.d.luau",
-        "./deadline-types/shared/shared-globals.d.luau",
-        "./deadline-types/shared/sharedvars.d.luau",
+		"deadline-shared-types": "./deadline-types/shared/shared-types.d.luau",
+		"deadline-shared-globals": "./deadline-types/shared/shared-globals.d.luau",
+		"deadline-shared-vars": "./deadline-types/shared/sharedvars.d.luau",
 
 		// server
-        "./deadline-types/server/server-globals.d.luau",
-        
+		"deadline-server-globals": "./deadline-types/server/server-globals.d.luau",
+		
 		// client
-		"./deadline-types/client/keybind_name.d.luau",
-		// comment this one out when not actively doing stuff on client scripts, overrides some server globals, note that you have to also reload the window
-		// "./deadline-types/client/client-globals.d.luau",
-    ],
-    "luau-lsp.sourcemap.enabled": false,
-	// "luau-lsp.fflags.enableNewSolver": true,
-	"luau-lsp.types.disabledGlobals": [ // generated using ./deadline-types/src/disabled_globals.luau, need to manually copy these over every time theyre updated currently
+		"deadline-client-keybind-names": "./deadline-types/client/keybind_name.d.luau",
+		// comment this one out if youre not actively doing something on the client, overrides some server globals, todo
+		"deadline-client-globals": "./deadline-types/client/client-globals.d.luau",
+	},
+
+	// generated using ./src/disabled_globals.luau
+	"luau-lsp.types.disabledGlobals": [
 		"CatalogSearchParams",
 		"Content",
 		"DateTime",
@@ -70,5 +80,5 @@
 		"version",
 		"workspace",
 		"ypcall",
-	],
+	]
 }
