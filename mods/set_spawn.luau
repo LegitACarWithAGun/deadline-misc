@@ -1,3 +1,5 @@
+-- run this file in the deadline server console
+
 -- INSTRUCTIONS:
 -- ;spawn_set :: set the default spawn, does not reset overrides
 -- ;spawn_set <username> :: set the spawn for a specific player (this is henchforth reffered to as a spawn override)
@@ -142,3 +144,5 @@ shared.dlcomp_command_bot.add_command("spawn_list", "prints all the spawn condit
 
 	chat.send_announcement(`spawn conditions printed into the console`)
 end)
+
+-- run this file in the deadline server console

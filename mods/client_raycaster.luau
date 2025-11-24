@@ -1,3 +1,5 @@
+-- run this file in the deadline client console
+
 if shared.legit_raycaster then
 	shared.legit_raycaster.destroy()
 end
@@ -89,3 +91,5 @@ shared.legit_raycaster = {
 		part_end.destroy()
 	end
 }
+
+-- run this file in the deadline client console
