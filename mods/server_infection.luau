@@ -9,11 +9,8 @@
 -- ;infect_end :: disables the team switching and loadout overriding inherit to infection, this automatically gets run every time the round ends
 -- ;toggle_infect_respawn <toggle> :: when a admin infects a random person, should that person be respawned or transform in-place
 
--- CAUTION:
--- prevents manually switching teams
-sharedvars.gm_team_balancing_threshold = -1
 
-
+-- clean up previously loaded version of the mod
 if shared.legit_infection then
 	shared.legit_infection.destroy()
 end
