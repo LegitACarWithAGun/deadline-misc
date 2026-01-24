@@ -82,6 +82,11 @@ function start_round(infected_count: number)
 	chat.send_announcement("enabling infected")
 	active = true
 
+	-- replace loadouts of people who are already on the infected team
+	for _, player in get_alive_in_team(module.team_infected) do
+		set_infected_loadout(player)
+	end
+
 	-- choose players to switch to infected team
 	infect_random_survivors(infected_count)
 
