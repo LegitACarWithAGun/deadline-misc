@@ -1,0 +1,28 @@
+-- run in the client console
+
+-- gather All defined keybinds
+local keybind_found = {}
+for id, info in config.keybinds do
+	keybind_found[id] = false
+end
+
+-- look through keybinds menu
+for _, row in config.settings_layout.keybinds do
+	if row.type ~= "keybind" then
+		continue
+	end
+	keybind_found[row.keybind] = true
+end
+
+for name, found in keybind_found do
+	if found then
+		continue
+	end
+	local data = config.keybinds[name]
+	print(`{name}:`)
+	print(`	- human: {data.name}`)
+	print(`	- description: {data.description}`)
+	local default = data.default[1] or {}
+	print(`	- default type: {default.input_type}`)
+	print(`	- default key: {default.key_code}`)
+end
