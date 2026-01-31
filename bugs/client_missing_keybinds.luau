@@ -11,9 +11,18 @@ for _, row in config.settings_layout.keybinds do
 	if row.type ~= "keybind" then
 		continue
 	end
-	keybind_found[row.keybind] = true
+
+	local name = row.keybind
+	-- check for unexpected state
+	if keybind_found[name] ~= false then
+		-- TODO: warn doesnt work on client for some reason
+		info(`weird state: {name} {keybind_found[name]}`)
+	end
+
+	keybind_found[name] = true
 end
 
+-- format and output results
 for name, found in keybind_found do
 	if found then
 		continue
